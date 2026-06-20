@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Patients · MIRA{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h3 class="mb-0">Patient Records</h3>
+  <span class="badge bg-secondary">{{ patients|length }} record(s)</span>
+</div>
+
+{% if patients %}
+<div class="table-responsive card shadow-sm">
+  <table class="table table-hover align-middle mb-0">
+    <thead class="table-light">
+      <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Glucose</th>
+        <th>Haemoglobin</th>
+        <th>Cholesterol</th>
+        <th>AI Remarks</th>
+        <th class="text-end">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for p in patients %}
+      <tr>
+        <td>
+          <a href="{{ url_for('detail', patient_id=p.id) }}" class="fw-semibold text-decoration-none">
+            {{ p.full_name }}
+          </a>
+          <div class="text-muted small">{{ p.email }}</div>
+        </td>
+        <td>{{ p.age }}</td>
+        <td>{{ p.glucose }}</td>
+        <td>{{ p.haemoglobin }}</td>
+        <td>{{ p.cholesterol }}</td>
+        <td class="small" style="max-width: 280px;">{{ p.remarks }}</td>
+        <td class="text-end text-nowrap">
+          <a href="{{ url_for('update', patient_id=p.id) }}" class="btn btn-sm btn-outline-primary">Edit</a>
+          <form action="{{ url_for('delete', patient_id=p.id) }}" method="post" class="d-inline"
+                onsubmit="return confirm('Delete this patient record?');">
+            <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+<div class="text-center text-muted py-5 card shadow-sm">
+  <p class="mb-3">No patient records yet.</p>
+  <div><a href="{{ url_for('create') }}" class="btn btn-primary">Add your first patient</a></div>
+</div>
+{% endif %}
+{% endblock %}

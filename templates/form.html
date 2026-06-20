@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}{{ "Edit" if mode == "edit" else "New" }} Patient · MIRA{% endblock %}
+
+{% macro field(name, label, type="text", step=None) %}
+<div class="mb-3">
+  <label for="{{ name }}" class="form-label">{{ label }}</label>
+  <input
+    type="{{ type }}"
+    {% if step %}step="{{ step }}"{% endif %}
+    class="form-control {{ 'is-invalid' if errors.get(name) }}"
+    id="{{ name }}"
+    name="{{ name }}"
+    value="{{ form.get(name, '') }}"
+    required>
+  {% if errors.get(name) %}
+    <div class="invalid-feedback">{{ errors[name] }}</div>
+  {% endif %}
+</div>
+{% endmacro %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-7">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h4 class="card-title mb-4">
+          {{ "Edit Patient" if mode == "edit" else "New Patient" }}
+        </h4>
+        <form method="post" novalidate>
+          {{ field("full_name", "Full Name") }}
+          {{ field("date_of_birth", "Date of Birth", type="date") }}
+          {{ field("email", "Email Address", type="email") }}
+          <div class="row">
+            <div class="col-md-4">{{ field("glucose", "Glucose (mg/dL)", type="number", step="0.1") }}</div>
+            <div class="col-md-4">{{ field("haemoglobin", "Haemoglobin (g/dL)", type="number", step="0.1") }}</div>
+            <div class="col-md-4">{{ field("cholesterol", "Cholesterol (mg/dL)", type="number", step="0.1") }}</div>
+          </div>
+          <p class="text-muted small">
+            The AI "Remarks" health-risk prediction is generated automatically on save.
+          </p>
+          <div class="d-flex gap-2 mt-3">
+            <button type="submit" class="btn btn-primary">
+              {{ "Save Changes" if mode == "edit" else "Create & Analyse" }}
+            </button>
+            <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">Cancel</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

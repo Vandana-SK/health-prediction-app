@@ -1,0 +1,21 @@
+body {
+  background-color: #f4f6f9;
+}
+
+.navbar-brand {
+  letter-spacing: 0.3px;
+}
+
+.card {
+  border: none;
+  border-radius: 0.65rem;
+}
+
+.table > :not(caption) > * > * {
+  padding: 0.85rem 0.9rem;
+}
+
+footer {
+  border-top: 1px solid #e6e9ee;
+  margin-top: 2rem;
+}

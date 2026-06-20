@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Flask instance folder (contains the local SQLite DB)
+instance/
+*.db
+*.sqlite3
+
+# Trained model artifact (regenerated automatically on first run)
+ml/health_model.pkl
+
+# Secrets / environment
+.env
+*.key
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
