@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Python
 __pycache__/
 *.py[cod]
@@ -24,10 +24,5 @@ ml/health_model.pkl
 .idea/
 .DS_Store
 Thumbs.db
-=======
-venv/
-*.db
-__pycache__/
-*.pyc
-.env
->>>>>>> 77bf43a41011e393d8c9c3fbce9143f5f55d4c06
+
+
